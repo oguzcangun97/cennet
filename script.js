@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✔️ EVET
     if (e.target.id === "yesBtn") {
-      box.innerHTML = "<p>Oh sonunda.</p>";
+      box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓 </p>";
 
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -100,3 +100,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
