@@ -7,24 +7,34 @@
 </head>
 <body>
 
+  <!-- Arka plan müziği -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <section class="hero" id="section1">
     <h1>Bazı insanlar tesadüf değildir.</h1>
+    <p class="caption">Bunu ilk fark ettiğim an buydu.</p>
   </section>
 
   <section class="hidden" id="section2">
     <p>Seni dinlemek kolay.<br>Zihnin sakin ama uyanık.</p>
+    <p class="caption">Sessizlik bile doluydu.</p>
   </section>
 
   <section class="hidden" id="section3">
     <p>Biri seni gerçekten fark ettiğinde,<br>bunu anlatmasına gerek kalmaz.</p>
+    <p class="caption">Bakışından belliydi.</p>
   </section>
 
   <section class="hidden" id="section4">
     <p>Bazı anlar vardır,<br>konuşmadan da paylaşılır.</p>
+    <p class="caption">Bu anlardan biri.</p>
   </section>
 
   <section class="hidden" id="section5">
     <p>Bu bir büyük cümle değil.<br>Sadece içten bir düşünce.</p>
+    <p class="caption">Ve hâlâ geçerli.</p>
   </section>
 
   <!-- FİNAL -->
@@ -37,6 +47,11 @@
       <button id="noBtn" class="choice no">Hayır</button>
       <button id="yesBtn" class="choice yes">Evet</button>
     </div>
+
+    <p class="date">
+      Birlikte geçen süre<br>
+      <span id="counter">yükleniyor...</span>
+    </p>
   </section>
 
   <button id="nextBtn">Devam et</button>
