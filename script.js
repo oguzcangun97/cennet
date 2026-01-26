@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { once: true });
 
   // Devam Et
-  document.getElementById("nextBtn").addEventListener("click", () => {
+  document.getElementById("nextBtn").addEventListener("click"), () => {
     index++;
     if (!scenes[index]) return;
 
@@ -156,3 +156,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.head.appendChild(style);
 
 });
+
