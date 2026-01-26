@@ -74,6 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
+     // ❤️ İLİŞKİ SAYACI
+  const startDate = new Date("2025-12-01T00:00:00"); // DEĞİŞTİR
+
+  function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+    const counter = document.getElementById("counter");
+    if (counter) {
+      counter.innerHTML = `${days} gün ${hours} saat ${minutes} dakika`;
+    }
+  }
+
+  updateCounter();
+  setInterval(updateCounter, 60000);
+
+
     // ✔️ EVET
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓 </p>";
@@ -100,4 +121,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
