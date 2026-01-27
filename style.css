@@ -1,3 +1,10 @@
+/* RESET – mobil güvenlik */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 /* GENEL */
 body {
   margin: 0;
@@ -6,7 +13,6 @@ body {
   text-align: center;
 
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
@@ -14,21 +20,16 @@ body {
   transition: background-image 0.8s ease, transform 1.2s ease;
 }
 
-/* Zoom (desktop) */
 body.zoomed {
   transform: scale(1);
 }
 
-/* OVERLAY */
+/* Overlay */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(15,23,42,0.55),
-    rgba(15,23,42,0.65)
-  );
+  background: var(--overlay, rgba(15,23,42,0.6));
   z-index: -1;
 }
 
@@ -46,7 +47,6 @@ section {
   display: flex;
 }
 
-/* YAZI */
 section p {
   max-width: 90%;
 }
@@ -55,13 +55,13 @@ section p {
 .caption {
   margin-top: 18px;
   font-size: 14px;
-  opacity: 0.75;
+  opacity: 0.7;
   font-style: italic;
 }
 
 /* SAYAÇ */
 .date {
-  margin-top: 45px;
+  margin-top: 50px;
   font-size: 13px;
   opacity: 0.6;
 }
@@ -70,9 +70,10 @@ section p {
   display: block;
   margin-top: 8px;
   font-size: 18px;
+  font-weight: 500;
 }
 
-/* DEVAM */
+/* DEVAM BUTONU */
 #nextBtn {
   position: fixed;
   bottom: 80px;
@@ -135,18 +136,29 @@ section p {
   }
 }
 
-/* 📱 MOBİL – CLOSE-UP FOTO FIX */
+/* 💖 SEVGİLİLER GÜNÜ YAZISI (JS ile eklenen) */
+.valentineType {
+  margin-top: 35px;
+  font-size: 22px;
+  font-weight: 600;
+  opacity: 0.9;
+  text-shadow: 0 0 10px rgba(255,120,120,0.6);
+}
+
+/* 📱 MOBİL – SAHNE BAZLI KADRAJ */
 @media (max-width: 768px) {
+
   body {
     background-attachment: scroll;
-    background-size: cover;
-    background-position: center 25%; /* 👈 KRİTİK */
     transform: none;
   }
 
-  body.zoomed {
-    transform: none;
-  }
+  body.section1 { background-position: center center; }
+  body.section2 { background-position: center 30%; }
+  body.section3 { background-position: center 15%; }
+  body.section4 { background-position: center 10%; }
+  body.section5 { background-position: center 5%; }
+  body.section6 { background-position: center 0%; }
 
   section {
     padding: 24px;
