@@ -14,17 +14,21 @@ body {
   transition: background-image 0.8s ease, transform 1.2s ease;
 }
 
-/* Zoom animasyonu (desktop) */
+/* Zoom (desktop) */
 body.zoomed {
   transform: scale(1);
 }
 
-/* Overlay */
+/* OVERLAY */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background: var(--overlay, rgba(15,23,42,0.6));
+  background: linear-gradient(
+    to bottom,
+    rgba(15,23,42,0.55),
+    rgba(15,23,42,0.65)
+  );
   z-index: -1;
 }
 
@@ -42,112 +46,13 @@ section {
   display: flex;
 }
 
-/* YAZI ALT AÇIKLAMA */
+/* YAZI */
+section p {
+  max-width: 90%;
+}
+
+/* ALT YAZI */
 .caption {
-  margin-top: 20px;
+  margin-top: 18px;
   font-size: 14px;
-  opacity: 0.7;
-  font-style: italic;
-}
-
-/* SAYAÇ */
-.date {
-  margin-top: 50px;
-  font-size: 13px;
-  opacity: 0.6;
-}
-
-#counter {
-  display: block;
-  margin-top: 8px;
-  font-size: 18px;
-  font-weight: 500;
-  opacity: 0.9;
-}
-
-/* DEVAM ET BUTONU */
-#nextBtn {
-  position: fixed;
-  bottom: 80px;
-  right: 30px;
-  padding: 14px 28px;
-  background: transparent;
-  color: #f8fafc;
-  border: 1px solid #f8fafc;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-/* EVET / HAYIR */
-#choiceBox {
-  margin-top: 60px;
-  display: flex;
-  gap: 20px;
-}
-
-.choice {
-  padding: 12px 28px;
-  border: 1px solid #f8fafc;
-  background: transparent;
-  color: #f8fafc;
-  cursor: pointer;
-}
-
-.choice.no {
-  opacity: 0.6;
-}
-
-/* ❤️ KALP ANİMASYONU */
-.heart {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  font-size: 48px;
-  color: red;
-  transform: translate(-50%, -50%) scale(0.5);
-  opacity: 0;
-  animation: heartPop 1.4s ease forwards;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-@keyframes heartPop {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
-  }
-  40% {
-    opacity: 1;
-    transform: translate(-50%, -60%) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -90%) scale(0.8);
-  }
-}
-
-/* 📱 MOBİL – ESTETİK + GÜVENLİ GÖRÜNÜM */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-    background-position: center center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: #0f172a;
-    transform: none;
-  }
-
-  body.zoomed {
-    transform: none;
-  }
-
-  section {
-    padding: 24px;
-  }
-
-  #nextBtn {
-    bottom: 40px;
-    right: 20px;
-    padding: 12px 22px;
-  }
-}
+  opa
