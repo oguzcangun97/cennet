@@ -60,7 +60,6 @@ section {
   margin-top: 8px;
   font-size: 18px;
   font-weight: 500;
-  opacity: 0.9;
 }
 
 /* Devam Et */
@@ -95,31 +94,37 @@ section {
   opacity: 0.6;
 }
 
-/* ❤️ Kalp */
-.heart {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  font-size: 48px;
-  color: red;
-  transform: translate(-50%, -50%) scale(0.5);
-  opacity: 0;
-  animation: heartPop 1.4s ease forwards;
-  pointer-events: none;
-  z-index: 9999;
+/* ✨ DAKTİLO – PARLAYAN FINAL YAZI */
+.valentineType {
+  margin-top: 40px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #ffe4e6;
+  text-shadow:
+    0 0 8px rgba(255,120,160,0.6),
+    0 0 16px rgba(255,80,140,0.6),
+    0 0 28px rgba(255,60,120,0.5);
+  animation: glowPulse 2.2s ease-in-out infinite;
 }
 
-@keyframes heartPop {
+@keyframes glowPulse {
   0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
+    text-shadow:
+      0 0 6px rgba(255,120,160,0.4),
+      0 0 14px rgba(255,80,140,0.4),
+      0 0 24px rgba(255,60,120,0.3);
   }
-  40% {
-    opacity: 1;
-    transform: translate(-50%, -60%) scale(1.2);
+  50% {
+    text-shadow:
+      0 0 12px rgba(255,140,180,0.9),
+      0 0 26px rgba(255,100,160,0.9),
+      0 0 40px rgba(255,80,140,0.8);
   }
   100% {
-    opacity: 0;
-    transform: translate(-50%, -90%) scale(0.8);
+    text-shadow:
+      0 0 6px rgba(255,120,160,0.4),
+      0 0 14px rgba(255,80,140,0.4),
+      0 0 24px rgba(255,60,120,0.3);
   }
 }
