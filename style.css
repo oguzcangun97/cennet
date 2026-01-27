@@ -94,3 +94,32 @@ section {
 .choice.no {
   opacity: 0.6;
 }
+
+/* ❤️ Kalp */
+.heart {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  font-size: 48px;
+  color: red;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  animation: heartPop 1.4s ease forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes heartPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -60%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.8);
+  }
+}
