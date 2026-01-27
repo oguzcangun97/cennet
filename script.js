@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scene.soft ? "rgba(15,23,42,0.35)" : "rgba(15,23,42,0.6)"
     );
 
-    /* 🔴 KRİTİK: mobil sahne kadrajı için */
+    /* 🔴 Sahne class (mobil kadraj için) */
     document.body.className = scene.id;
 
     setTimeout(() => document.body.classList.add("zoomed"), 50);
@@ -42,15 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { once: true });
 
-  /* Devam Et */
+  /* ▶️ DEVAM ET (SCROLL FIX DAHİL) */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
 
     const section = document.getElementById(scenes[index].id);
     section.style.display = "flex";
-    section.scrollIntoView({ behavior: "smooth" });
+
     showScene(scenes[index]);
+
+    /* 🔥 KRİTİK FIX: her sahnede yukarı sabitle */
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
     if (scenes[index].id === "section6") {
       document.getElementById("nextBtn").style.display = "none";
@@ -87,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
-      /* Kalp animasyonu */
+      /* Kalp */
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.textContent = "♥";
@@ -124,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ❤️ İLİŞKİ SAYACI */
-  const startDate = new Date("2025-12-01T00:00:00"); // ← burayı istersen değiştir
+  const startDate = new Date("2025-12-01T00:00:00"); // gerekirse değiştir
 
   function updateCounter() {
     const now = new Date();
@@ -142,18 +145,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCounter();
   setInterval(updateCounter, 60000);
-
-  /* ✨ Yazı stili (JS içinden) */
-  const style = document.createElement("style");
-  style.innerHTML = `
-    .valentineType {
-      margin-top: 35px;
-      font-size: 22px;
-      font-weight: 600;
-      opacity: 0.9;
-      text-shadow: 0 0 10px rgba(255,120,120,0.6);
-    }
-  `;
-  document.head.appendChild(style);
 
 });
