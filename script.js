@@ -86,9 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         const text =
-          "Ve bu,\n" +
-          "seninle geçirdiğimiz\n" +
-          "ilk Sevgililer Günü";
+          "💓 Ve bu,\n 💓" +
+          "💓 seninle geçirdiğimiz 💓\n" +
+          "💓 ilk Sevgililer Günü,💓\n"+
+          "💓 SENİ SEVİYORUM,💓";
 
         const p = document.createElement("p");
         p.className = "valentineType";
@@ -128,3 +129,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateCounter, 60000);
 
 });
+
