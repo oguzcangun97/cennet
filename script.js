@@ -85,10 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
       setTimeout(() => {
+
         const text =
-          "💓 Ve bu,\n 💓" +
+          "💓 Ve bu,\n" +
           "💓 seninle geçirdiğimiz 💓\n" +
-          "💓 ilk Sevgililer Günü,💓\n"+
+          "💓 ilk Sevgililer Günü,💓\n" +
           "💓 SENİ SEVİYORUM,💓";
 
         const p = document.createElement("p");
@@ -103,7 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             clearInterval(typing);
           }
-        }, 90); // daktilo hızı
+        }, 85); // daktilo hızı
+
       }, 1500);
     }
   });
@@ -129,4 +131,3 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateCounter, 60000);
 
 });
-
