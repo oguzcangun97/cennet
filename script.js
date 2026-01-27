@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ❤️ EVET / HAYIR + DAKTİLO YAZI */
+  /* ❤️ EVET / HAYIR + DAKTİLO FINAL */
   document.body.addEventListener("click", (e) => {
 
     const box = document.getElementById("choiceBox");
@@ -86,25 +86,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
 
-        const text =
-          "💓 Ve bu,\n" +
-          "💓 seninle geçirdiğimiz 💓\n" +
-          "💓 ilk Sevgililer Günü,💓\n" +
-          "💓 SENİ SEVİYORUM,💓";
+        const lines = [
+          "💓 Ve bu,",
+          "💓 seninle geçirdiğimiz 💓",
+          "💓 ilk Sevgililer Günü,💓"
+        ];
 
-        const p = document.createElement("p");
-        p.className = "valentineType";
-        document.getElementById("section6").appendChild(p);
+        const container = document.createElement("div");
+        container.className = "valentineType";
+        document.getElementById("section6").appendChild(container);
 
-        let i = 0;
-        const typing = setInterval(() => {
-          if (i < text.length) {
-            p.innerHTML += text[i] === "\n" ? "<br>" : text[i];
-            i++;
-          } else {
-            clearInterval(typing);
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeLine() {
+          if (lineIndex >= lines.length) {
+            const love = document.createElement("div");
+            love.className = "loveBig";
+            love.textContent = "💓 SENİ SEVİYORUM 💓";
+            container.appendChild(love);
+            return;
           }
-        }, 85); // daktilo hızı
+
+          if (!container.children[lineIndex]) {
+            const line = document.createElement("div");
+            container.appendChild(line);
+          }
+
+          const currentLine = lines[lineIndex];
+
+          if (charIndex < currentLine.length) {
+            container.children[lineIndex].textContent += currentLine[charIndex];
+            charIndex++;
+            setTimeout(typeLine, 80);
+          } else {
+            lineIndex++;
+            charIndex = 0;
+            setTimeout(typeLine, 400);
+          }
+        }
+
+        typeLine();
 
       }, 1500);
     }
