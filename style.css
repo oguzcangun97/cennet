@@ -55,4 +55,117 @@ section p {
 .caption {
   margin-top: 18px;
   font-size: 14px;
-  opa
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* SAYAÇ */
+.date {
+  margin-top: 45px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+#counter {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+/* DEVAM */
+#nextBtn {
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  padding: 14px 28px;
+  background: rgba(15,23,42,0.4);
+  backdrop-filter: blur(6px);
+  color: #f8fafc;
+  border: 1px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* EVET / HAYIR */
+#choiceBox {
+  margin-top: 60px;
+  display: flex;
+  gap: 20px;
+}
+
+.choice {
+  padding: 12px 28px;
+  border: 1px solid #f8fafc;
+  background: rgba(15,23,42,0.35);
+  backdrop-filter: blur(6px);
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.choice.no {
+  opacity: 0.6;
+}
+
+/* ❤️ KALP */
+.heart {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  font-size: 48px;
+  color: red;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  animation: heartPop 1.4s ease forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes heartPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -60%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.8);
+  }
+}
+
+/* 📱 MOBİL – CLOSE-UP FOTO FIX */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center 25%; /* 👈 KRİTİK */
+    transform: none;
+  }
+
+  body.zoomed {
+    transform: none;
+  }
+
+  section {
+    padding: 24px;
+  }
+
+  section p {
+    background: rgba(15,23,42,0.45);
+    backdrop-filter: blur(8px);
+    padding: 14px 18px;
+    border-radius: 12px;
+  }
+
+  .caption {
+    background: none;
+    padding: 0;
+  }
+
+  #nextBtn {
+    bottom: 40px;
+    right: 20px;
+  }
+}
