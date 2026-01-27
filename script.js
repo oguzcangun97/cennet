@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showScene(scene) {
     document.body.classList.remove("zoomed");
 
-    document.body.style.backgroundImage = "url('" + scene.bg + "')";
+    document.body.style.backgroundImage = `url('${scene.bg}')`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
 
@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => document.body.classList.add("zoomed"), 50);
   }
 
-  // İlk sahne
+  /* İlk sahne */
   document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
-  // 🎵 Arka plan müziği
+  /* 🎵 Arka plan müziği */
   document.body.addEventListener("click", () => {
     const music = document.getElementById("bgMusic");
     if (music && music.paused) {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { once: true });
 
-  // Devam Et
+  /* ▶️ DEVAM ET */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = document.getElementById(scenes[index].id);
     section.style.display = "flex";
     section.scrollIntoView({ behavior: "smooth" });
+
     showScene(scenes[index]);
 
     if (scenes[index].id === "section6") {
@@ -55,23 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Evet / Hayır
+  /* ❤️ EVET / HAYIR + DAKTİLO YAZI */
   document.body.addEventListener("click", (e) => {
 
     const box = document.getElementById("choiceBox");
+    if (!box) return;
 
-    // ❌ HAYIR
+    /* ❌ HAYIR */
     if (e.target.id === "noBtn") {
       noCount++;
 
-      let message = "";
-      if (noCount === 1) {
-        message = "Yanlış cevap verdiniz.<br>Tekrar deneyiniz.";
-      } else if (noCount === 2) {
-        message = "Saçmalama,<br>evet nerede biliyorsun";
-      } else {
-        message = "Senin canın dayak istiyor";
-      }
+      let message =
+        noCount === 1 ? "Yanlış cevap verdiniz.<br>Tekrar deneyiniz." :
+        noCount === 2 ? "Saçmalama,<br>evet nerede biliyorsun" :
+        "Senin canın dayak istiyor";
 
       box.innerHTML = `
         <p style="opacity:0.75;">${message}</p>
@@ -82,26 +80,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    // ✔️ EVET
+    /* ✔️ EVET */
     if (e.target.id === "yesBtn") {
-      box.innerHTML = "<p>💓 Oh sonunda katil olmadım.💓 </p>";
+      box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.textContent = "♥";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1500);
-
-      // 💓 Kalp atış sesi
-      const beat = new Audio("heartbeat.mp3");
-      beat.volume = 0.6;
-      beat.play();
-
-      // ✍️ Harf harf yazılan mesaj
       setTimeout(() => {
         const text =
           "Ve bu,\n" +
-          "birlikte geçirdiğimiz\n" +
+          "seninle geçirdiğimiz\n" +
           "ilk Sevgililer Günü";
 
         const p = document.createElement("p");
@@ -116,14 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             clearInterval(typing);
           }
-        }, 80);
-      }, 2000);
+        }, 90); // daktilo hızı
+      }, 1500);
     }
-
   });
 
-  // ❤️ İLİŞKİ SAYACI
-  const startDate = new Date("2025-12-01T00:00:00"); // DEĞİŞTİR
+  /* ❤️ İLİŞKİ SAYACI */
+  const startDate = new Date("2025-12-01T00:00:00");
 
   function updateCounter() {
     const now = new Date();
@@ -141,18 +126,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCounter();
   setInterval(updateCounter, 60000);
-
-  // ✨ Yazı stili (JS içinden)
-  const style = document.createElement("style");
-  style.innerHTML = `
-    .valentineType {
-      margin-top: 35px;
-      font-size: 22px;
-      font-weight: 600;
-      opacity: 0.9;
-      text-shadow: 0 0 10px rgba(255,120,120,0.6);
-    }
-  `;
-  document.head.appendChild(style);
 
 });
