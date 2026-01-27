@@ -13,37 +13,54 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const sections = document.querySelectorAll("section");
+  const nextBtn = document.getElementById("nextBtn");
 
   function isMobile() {
     return window.innerWidth <= 768;
   }
 
-  function hideAllSections() {
-    sections.forEach(sec => sec.style.display = "none");
+  function resetBodySceneClasses() {
+    scenes.forEach(scene => {
+      document.body.classList.remove(scene.id);
+    });
   }
 
   function showScene(scene) {
 
-    /* 📱 MOBİL: tek sahne mantığı */
+    /* 📱 MOBİL */
     if (isMobile()) {
-      hideAllSections();
+      sections.forEach(sec => sec.style.display = "none");
       window.scrollTo(0, 0);
     }
+
+    resetBodySceneClasses();          // 🔴 EKSİK OLAN KISIM
+    document.body.classList.add(scene.id);
 
     document.body.classList.remove("zoomed");
 
     document.body.style.backgroundImage = `url('${scene.bg}')`;
     document.body.style.backgroundSize = "cover";
-
     document.body.style.setProperty(
       "--overlay",
       scene.soft ? "rgba(15,23,42,0.35)" : "rgba(15,23,42,0.6)"
     );
 
-    document.body.className = scene.id;
-
     const section = document.getElementById(scene.id);
     section.style.display = "flex";
+
+    /* 💻 WEB */
+    if (!isMobile()) {
+      section.appendChild(nextBtn);
+      nextBtn.style.position = "relative";
+      nextBtn.style.marginTop = "60px";
+    }
+    /* 📱 MOBİL */
+    else {
+      nextBtn.style.position = "fixed";
+      nextBtn.style.bottom = "80px";
+      nextBtn.style.right = "30px";
+      nextBtn.style.marginTop = "0";
+    }
 
     setTimeout(() => document.body.classList.add("zoomed"), 50);
   }
@@ -51,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* İlk sahne */
   showScene(scenes[0]);
 
-  /* 🎵 Arka plan müziği */
+  /* 🎵 Müzik */
   document.body.addEventListener("click", () => {
     const music = document.getElementById("bgMusic");
     if (music && music.paused) {
@@ -61,13 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { once: true });
 
   /* ▶️ DEVAM ET */
-  document.getElementById("nextBtn").addEventListener("click", () => {
+  nextBtn.addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
 
     showScene(scenes[index]);
 
-    /* Desktop'ta aşağı kaydır */
     if (!isMobile()) {
       document
         .getElementById(scenes[index].id)
@@ -75,44 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (scenes[index].id === "section6") {
-      document.getElementById("nextBtn").style.display = "none";
-    }
-  });
-
-  /* ❤️ EVET / HAYIR */
-  document.body.addEventListener("click", (e) => {
-    const box = document.getElementById("choiceBox");
-    if (!box) return;
-
-    if (e.target.id === "noBtn") {
-      noCount++;
-      let message = "";
-
-      if (noCount === 1) message = "Yanlış cevap verdiniz.<br>Tekrar deneyiniz.";
-      else if (noCount === 2) message = "Saçmalama,<br>evet nerede biliyorsun";
-      else message = "Senin canın dayak istiyor";
-
-      box.innerHTML = `
-        <p style="opacity:0.75;">${message}</p>
-        <div style="margin-top:20px;">
-          <button id="noBtn" class="choice no">Hayır</button>
-          <button id="yesBtn" class="choice yes">Evet</button>
-        </div>
-      `;
-    }
-
-    if (e.target.id === "yesBtn") {
-      box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
-
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.textContent = "♥";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1500);
-
-      const beat = new Audio("heartbeat.mp3");
-      beat.volume = 0.6;
-      beat.play();
+      nextBtn.style.display = "none";
     }
   });
 
