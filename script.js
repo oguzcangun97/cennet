@@ -12,7 +12,24 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "section6", bg: "images-bg6.jpg", soft: true }
   ];
 
+  const sections = document.querySelectorAll("section");
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function hideAllSections() {
+    sections.forEach(sec => sec.style.display = "none");
+  }
+
   function showScene(scene) {
+
+    /* 📱 MOBİL: tek sahne mantığı */
+    if (isMobile()) {
+      hideAllSections();
+      window.scrollTo(0, 0);
+    }
+
     document.body.classList.remove("zoomed");
 
     document.body.style.backgroundImage = `url('${scene.bg}')`;
@@ -23,14 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
       scene.soft ? "rgba(15,23,42,0.35)" : "rgba(15,23,42,0.6)"
     );
 
-    /* 🔴 Sahne class (mobil kadraj için) */
     document.body.className = scene.id;
+
+    const section = document.getElementById(scene.id);
+    section.style.display = "flex";
 
     setTimeout(() => document.body.classList.add("zoomed"), 50);
   }
 
   /* İlk sahne */
-  document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
   /* 🎵 Arka plan müziği */
@@ -42,18 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { once: true });
 
-  /* ▶️ DEVAM ET (SCROLL FIX DAHİL) */
+  /* ▶️ DEVAM ET */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
 
-    const section = document.getElementById(scenes[index].id);
-    section.style.display = "flex";
-
     showScene(scenes[index]);
 
-    /* 🔥 KRİTİK FIX: her sahnede yukarı sabitle */
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    /* Desktop'ta aşağı kaydır */
+    if (!isMobile()) {
+      document
+        .getElementById(scenes[index].id)
+        .scrollIntoView({ behavior: "smooth" });
+    }
 
     if (scenes[index].id === "section6") {
       document.getElementById("nextBtn").style.display = "none";
@@ -62,21 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ❤️ EVET / HAYIR */
   document.body.addEventListener("click", (e) => {
-
     const box = document.getElementById("choiceBox");
     if (!box) return;
 
     if (e.target.id === "noBtn") {
       noCount++;
-
       let message = "";
-      if (noCount === 1) {
-        message = "Yanlış cevap verdiniz.<br>Tekrar deneyiniz.";
-      } else if (noCount === 2) {
-        message = "Saçmalama,<br>evet nerede biliyorsun";
-      } else {
-        message = "Senin canın dayak istiyor";
-      }
+
+      if (noCount === 1) message = "Yanlış cevap verdiniz.<br>Tekrar deneyiniz.";
+      else if (noCount === 2) message = "Saçmalama,<br>evet nerede biliyorsun";
+      else message = "Senin canın dayak istiyor";
 
       box.innerHTML = `
         <p style="opacity:0.75;">${message}</p>
@@ -90,44 +104,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
-      /* Kalp */
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.textContent = "♥";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 1500);
 
-      /* Kalp sesi */
       const beat = new Audio("heartbeat.mp3");
       beat.volume = 0.6;
       beat.play();
-
-      /* Yazı efekti */
-      setTimeout(() => {
-        const text =
-          "Ve bu,\n" +
-          "birlikte geçirdiğimiz\n" +
-          "ilk Sevgililer Günü";
-
-        const p = document.createElement("p");
-        p.className = "valentineType";
-        document.getElementById("section6").appendChild(p);
-
-        let i = 0;
-        const typing = setInterval(() => {
-          if (i < text.length) {
-            p.innerHTML += text[i] === "\n" ? "<br>" : text[i];
-            i++;
-          } else {
-            clearInterval(typing);
-          }
-        }, 80);
-      }, 2000);
     }
   });
 
   /* ❤️ İLİŞKİ SAYACI */
-  const startDate = new Date("2025-12-01T00:00:00"); // gerekirse değiştir
+  const startDate = new Date("2025-12-01T00:00:00");
 
   function updateCounter() {
     const now = new Date();
