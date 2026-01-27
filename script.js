@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const box = document.getElementById("choiceBox");
 
+    // ❌ HAYIR
     if (e.target.id === "noBtn") {
       noCount++;
 
@@ -81,13 +82,48 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
+    // ✔️ EVET
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım.💓 </p>";
+
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "♥";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1500);
+
+      // 💓 Kalp atış sesi
+      const beat = new Audio("heartbeat.mp3");
+      beat.volume = 0.6;
+      beat.play();
+
+      // ✍️ Harf harf yazılan mesaj
+      setTimeout(() => {
+        const text =
+          "Ve bu,\n" +
+          "birlikte geçirdiğimiz\n" +
+          "ilk Sevgililer Günü";
+
+        const p = document.createElement("p");
+        p.className = "valentineType";
+        document.getElementById("section6").appendChild(p);
+
+        let i = 0;
+        const typing = setInterval(() => {
+          if (i < text.length) {
+            p.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+            i++;
+          } else {
+            clearInterval(typing);
+          }
+        }, 80);
+      }, 2000);
     }
+
   });
 
   // ❤️ İLİŞKİ SAYACI
-  const startDate = new Date("2025-12-01T00:00:00");
+  const startDate = new Date("2025-12-01T00:00:00"); // DEĞİŞTİR
 
   function updateCounter() {
     const now = new Date();
@@ -105,5 +141,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCounter();
   setInterval(updateCounter, 60000);
+
+  // ✨ Yazı stili (JS içinden)
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .valentineType {
+      margin-top: 35px;
+      font-size: 22px;
+      font-weight: 600;
+      opacity: 0.9;
+      text-shadow: 0 0 10px rgba(255,120,120,0.6);
+    }
+  `;
+  document.head.appendChild(style);
 
 });
