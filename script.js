@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
 
         const lines = [
-          "💓 Ve bu,",
+          "💓 Ve bu,💓",
           "💓 seninle geçirdiğimiz 💓",
           "💓 ilk Sevgililer Günü,💓"
         ];
@@ -153,3 +153,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateCounter, 60000);
 
 });
+
