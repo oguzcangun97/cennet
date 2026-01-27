@@ -15,23 +15,34 @@ document.addEventListener("DOMContentLoaded", () => {
   function showScene(scene) {
     document.body.classList.remove("zoomed");
 
-    document.body.style.backgroundImage = "url('" + scene.bg + "')";
+    document.body.style.backgroundImage = `url('${scene.bg}')`;
     document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center";
 
     document.body.style.setProperty(
       "--overlay",
       scene.soft ? "rgba(15,23,42,0.35)" : "rgba(15,23,42,0.6)"
     );
 
+    /* 🔴 KRİTİK: mobil sahne kadrajı için */
+    document.body.className = scene.id;
+
     setTimeout(() => document.body.classList.add("zoomed"), 50);
   }
 
-  // İlk sahne
+  /* İlk sahne */
   document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
-  // Devam Et
+  /* 🎵 Arka plan müziği */
+  document.body.addEventListener("click", () => {
+    const music = document.getElementById("bgMusic");
+    if (music && music.paused) {
+      music.volume = 0.3;
+      music.play();
+    }
+  }, { once: true });
+
+  /* Devam Et */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
@@ -46,13 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Evet / Hayır
+  /* ❤️ EVET / HAYIR */
   document.body.addEventListener("click", (e) => {
 
     const box = document.getElementById("choiceBox");
     if (!box) return;
 
-    // ❌ HAYIR
     if (e.target.id === "noBtn") {
       noCount++;
 
@@ -74,8 +84,47 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-     // ❤️ İLİŞKİ SAYACI
-  const startDate = new Date("2025-12-01T00:00:00"); // DEĞİŞTİR
+    if (e.target.id === "yesBtn") {
+      box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
+
+      /* Kalp animasyonu */
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "♥";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1500);
+
+      /* Kalp sesi */
+      const beat = new Audio("heartbeat.mp3");
+      beat.volume = 0.6;
+      beat.play();
+
+      /* Yazı efekti */
+      setTimeout(() => {
+        const text =
+          "Ve bu,\n" +
+          "birlikte geçirdiğimiz\n" +
+          "ilk Sevgililer Günü";
+
+        const p = document.createElement("p");
+        p.className = "valentineType";
+        document.getElementById("section6").appendChild(p);
+
+        let i = 0;
+        const typing = setInterval(() => {
+          if (i < text.length) {
+            p.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+            i++;
+          } else {
+            clearInterval(typing);
+          }
+        }, 80);
+      }, 2000);
+    }
+  });
+
+  /* ❤️ İLİŞKİ SAYACI */
+  const startDate = new Date("2025-12-01T00:00:00"); // ← burayı istersen değiştir
 
   function updateCounter() {
     const now = new Date();
@@ -94,32 +143,17 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCounter();
   setInterval(updateCounter, 60000);
 
-
-    // ✔️ EVET
-    if (e.target.id === "yesBtn") {
-      box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓 </p>";
-
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.textContent = "♥";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1500);
-
-      setTimeout(() => {
-        const p = document.createElement("p");
-        p.innerHTML = `
-          Ve bu,<br>
-          birlikte geçirdiğimiz<br>
-          <strong>ilk Sevgililer Günü</strong>
-        `;
-        p.style.marginTop = "30px";
-        p.style.opacity = "0.8";
-        document.getElementById("section6").appendChild(p);
-      }, 2000);
+  /* ✨ Yazı stili (JS içinden) */
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .valentineType {
+      margin-top: 35px;
+      font-size: 22px;
+      font-weight: 600;
+      opacity: 0.9;
+      text-shadow: 0 0 10px rgba(255,120,120,0.6);
     }
-
-  });
+  `;
+  document.head.appendChild(style);
 
 });
-
-
