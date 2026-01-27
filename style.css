@@ -1,11 +1,3 @@
-/* RESET – mobil güvenlik */
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-/* GENEL */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -13,6 +5,7 @@ body {
   text-align: center;
 
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
@@ -33,7 +26,7 @@ body::after {
   z-index: -1;
 }
 
-/* SAHNE */
+/* Sahne */
 section {
   min-height: 100vh;
   display: none;
@@ -47,19 +40,15 @@ section {
   display: flex;
 }
 
-section p {
-  max-width: 90%;
-}
-
-/* ALT YAZI */
+/* Caption */
 .caption {
-  margin-top: 18px;
+  margin-top: 20px;
   font-size: 14px;
   opacity: 0.7;
   font-style: italic;
 }
 
-/* SAYAÇ */
+/* Sayaç */
 .date {
   margin-top: 50px;
   font-size: 13px;
@@ -71,23 +60,23 @@ section p {
   margin-top: 8px;
   font-size: 18px;
   font-weight: 500;
+  opacity: 0.9;
 }
 
-/* DEVAM BUTONU */
+/* Devam Et */
 #nextBtn {
   position: fixed;
   bottom: 80px;
   right: 30px;
   padding: 14px 28px;
-  background: rgba(15,23,42,0.4);
-  backdrop-filter: blur(6px);
+  background: transparent;
   color: #f8fafc;
-  border: 1px solid rgba(255,255,255,0.4);
+  border: 1px solid #f8fafc;
   cursor: pointer;
   z-index: 1000;
 }
 
-/* EVET / HAYIR */
+/* Evet / Hayır */
 #choiceBox {
   margin-top: 60px;
   display: flex;
@@ -97,87 +86,11 @@ section p {
 .choice {
   padding: 12px 28px;
   border: 1px solid #f8fafc;
-  background: rgba(15,23,42,0.35);
-  backdrop-filter: blur(6px);
+  background: transparent;
   color: #f8fafc;
   cursor: pointer;
 }
 
 .choice.no {
   opacity: 0.6;
-}
-
-/* ❤️ KALP */
-.heart {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  font-size: 48px;
-  color: red;
-  transform: translate(-50%, -50%) scale(0.5);
-  opacity: 0;
-  animation: heartPop 1.4s ease forwards;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-@keyframes heartPop {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
-  }
-  40% {
-    opacity: 1;
-    transform: translate(-50%, -60%) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -90%) scale(0.8);
-  }
-}
-
-/* 💖 SEVGİLİLER GÜNÜ YAZISI (JS ile eklenen) */
-.valentineType {
-  margin-top: 35px;
-  font-size: 22px;
-  font-weight: 600;
-  opacity: 0.9;
-  text-shadow: 0 0 10px rgba(255,120,120,0.6);
-}
-
-/* 📱 MOBİL – SAHNE BAZLI KADRAJ */
-@media (max-width: 768px) {
-
-  body {
-    background-attachment: scroll;
-    transform: none;
-  }
-
-  body.section1 { background-position: center center; }
-  body.section2 { background-position: center 30%; }
-  body.section3 { background-position: center 15%; }
-  body.section4 { background-position: center 10%; }
-  body.section5 { background-position: center 5%; }
-  body.section6 { background-position: center 0%; }
-
-  section {
-    padding: 24px;
-  }
-
-  section p {
-    background: rgba(15,23,42,0.45);
-    backdrop-filter: blur(8px);
-    padding: 14px 18px;
-    border-radius: 12px;
-  }
-
-  .caption {
-    background: none;
-    padding: 0;
-  }
-
-  #nextBtn {
-    bottom: 40px;
-    right: 20px;
-  }
 }
