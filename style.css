@@ -9,10 +9,10 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-  transform: scale(1.03);
-  transition: background-image 0.8s ease, transform 1.2s ease;
+  transition: background-image 0.8s ease;
 }
 
+/* Overlay */
 body::after {
   content: "";
   position: fixed;
@@ -21,9 +21,11 @@ body::after {
   z-index: -1;
 }
 
+/* Sahne */
 section {
   min-height: 100vh;
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 32px 16px;
@@ -40,7 +42,7 @@ section {
   font-style: italic;
 }
 
-/* Counter */
+/* Sayaç */
 .date {
   font-size: 13px;
   opacity: 0.6;
@@ -53,10 +55,10 @@ section {
   font-weight: 500;
 }
 
-/* Next */
+/* Devam Et */
 #nextBtn {
   position: fixed;
-  bottom: 24px;
+  bottom: 20px;
   right: 20px;
   padding: 12px 22px;
   background: transparent;
@@ -65,11 +67,11 @@ section {
   z-index: 1000;
 }
 
-/* Choices */
+/* Choice */
 .choice {
   padding: 12px 26px;
-  background: transparent;
   border: 1px solid #f8fafc;
+  background: transparent;
   color: #f8fafc;
 }
 
@@ -77,44 +79,69 @@ section {
   opacity: 0.6;
 }
 
-/* Valentine typing */
+/* Final type */
 .valentineType {
-  margin-top: 32px;
+  width: 100%;
+  max-width: 420px;
+  margin: 32px auto 0;
+  text-align: center;
   font-size: clamp(20px, 5vw, 26px);
   font-weight: 600;
   color: #ffe4e6;
-  text-shadow: 0 0 10px rgba(255,120,160,.6);
+  text-shadow: 0 0 10px rgba(255,120,160,0.6);
 }
 
-/* Love */
 .loveBig {
   margin-top: 24px;
   font-size: clamp(26px, 6vw, 34px);
   font-weight: 800;
   letter-spacing: 2px;
+  text-align: center;
   animation: lovePulse 1.8s infinite;
 }
 
 @keyframes lovePulse {
-  0% { transform: scale(1); opacity: .85; }
-/* ✅ FINAL METİN MOBİL FIX */
-.valentineType {
-  width: 100%;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  0% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.85; }
 }
 
-/* SENİ SEVİYORUM ORTADA KALSIN */
-.loveBig {
-  width: 100%;
-  text-align: center;
+#heartBar {
+  margin-top: 12px;
+  font-size: 24px;
+  letter-spacing: 4px;
 }
 
-/* SAYAÇ FINALDE ORTALI */
+.choice.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* =========================
+   📱 iOS SAFE AREA POLISH
+========================= */
+
+/* Genel safe area */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Devam Et butonu home bar üstünde */
+#nextBtn {
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  right: calc(20px + env(safe-area-inset-right));
+}
+
+/* Final sayaç nefes alsın */
 .valentineType .date {
-  width: 100%;
-  text-align: center;
-  margin-top: 20px;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ✅ OPSİYONEL AMA GÜZEL
+   Sadece safe-area destekleyen cihazlarda */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
