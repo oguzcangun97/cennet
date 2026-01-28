@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* =====================
+     GENEL DEĞİŞKENLER
+  ===================== */
   let index = 0;
   let noCount = 0;
+  let heartCount = 5;
   let heartbeatAudio = null;
 
   const scenes = [
@@ -13,34 +17,29 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "section6", bg: "images-bg6.jpg", soft: true }
   ];
 
+  /* =====================
+     SAHNE GÖSTER
+  ===================== */
   function showScene(scene) {
-    document.body.classList.remove("zoomed");
-
     document.body.style.backgroundImage = `url('${scene.bg}')`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
-
     document.body.style.setProperty(
       "--overlay",
       scene.soft ? "rgba(15,23,42,0.35)" : "rgba(15,23,42,0.6)"
     );
-
-    setTimeout(() => document.body.classList.add("zoomed"), 50);
   }
 
-  /* İlk sahne */
   document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
-  /* ▶️ DEVAM ET */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
 
-    const section = document.getElementById(scenes[index].id);
-    section.style.display = "flex";
-    section.scrollIntoView({ behavior: "smooth" });
-
+    const sec = document.getElementById(scenes[index].id);
+    sec.style.display = "flex";
+    sec.scrollIntoView({ behavior: "smooth" });
     showScene(scenes[index]);
 
     if (scenes[index].id === "section6") {
@@ -48,7 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ❤️ EVET / HAYIR + FINAL */
+  /* =====================
+     KALP BAR
+  ===================== */
+  function renderHeartBar() {
+    let hearts = "";
+    for (let i = 0; i < 5; i++) {
+      hearts += i < heartCount ? "❤️" : "🤍";
+    }
+    return `<div id="heartBar">${hearts}</div>`;
+  }
+
+  /* =====================
+     TIKLAMALAR
+  ===================== */
   document.body.addEventListener("click", (e) => {
 
     const box = document.getElementById("choiceBox");
@@ -57,14 +69,30 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ❌ HAYIR */
     if (e.target.id === "noBtn") {
       noCount++;
+      heartCount--;
 
-      let message =
-        noCount === 1 ? "Yanlış cevap verdiniz.<br>Tekrar deneyiniz." :
-        noCount === 2 ? "Saçmalama,<br>evet nerede biliyorsun" :
-        "Senin canın dayak istiyor";
+      let message = "";
+      if (noCount === 1) message = "Yanlış cevap verdiniz.<br>Tekrar deneyiniz.";
+      else if (noCount === 2) message = "Saçmalama,<br>evet nerede biliyorsun";
+      else if (noCount === 3) message = "Senin canın dayak istiyor";
+      else if (noCount === 4) message = "Emin misin?";
+      else if (noCount === 5) message = "Peki… ama ben buradayım.";
+
+      if (heartCount <= 0) {
+        box.innerHTML = `
+          <p><strong>Bir öpücüğe bir kalp daha?</strong> 💋❤️</p>
+          <div style="margin-top:20px;">
+            <button id="kissBtn" class="choice yes">Öpücük 💋</button>
+            <button id="deadNoBtn" class="choice disabled">Hayır yok artık</button>
+          </div>
+          <p id="deadNoMsg" style="margin-top:12px; opacity:0.7;"></p>
+        `;
+        return;
+      }
 
       box.innerHTML = `
-        <p style="opacity:0.75;">${message}</p>
+        ${renderHeartBar()}
+        <p style="opacity:0.85;">${message}</p>
         <div style="margin-top:20px;">
           <button id="noBtn" class="choice no">Hayır</button>
           <button id="yesBtn" class="choice yes">Evet</button>
@@ -72,12 +100,28 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    /* ✔️ EVET */
+    /* ❌ ÇALIŞMAYAN HAYIR */
+    if (e.target.id === "deadNoBtn") {
+      const msg = document.getElementById("deadNoMsg");
+      if (msg) msg.textContent = "Bu buton artık çalışmıyor 🙂";
+    }
+
+    /* 💋 ÖPÜCÜK */
+    if (e.target.id === "kissBtn") {
+      heartCount = 1;
+      box.innerHTML = `
+        ${renderHeartBar()}
+        <p>❤️ Kalbim geri geldi…</p>
+        <p>Şimdi asıl soruya geçebiliriz.</p>
+        <button id="yesBtn" class="choice yes">Devam 💓</button>
+      `;
+    }
+
+    /* ✔️ EVET – FINAL */
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
       setTimeout(() => {
-
         const lines = [
           "💓 Ve bu,",
           "💓 seninle geçirdiğimiz 💓",
@@ -88,69 +132,57 @@ document.addEventListener("DOMContentLoaded", () => {
         container.className = "valentineType";
         document.getElementById("section6").appendChild(container);
 
-        let lineIndex = 0;
-        let charIndex = 0;
+        let line = 0, char = 0;
 
         function typeLine() {
-          if (lineIndex >= lines.length) {
-
-            /* 💓 SENİ SEVİYORUM */
+          if (line >= lines.length) {
             const love = document.createElement("div");
             love.className = "loveBig";
             love.textContent = "💓 SENİ SEVİYORUM 💓";
             container.appendChild(love);
 
-            /* 🔊 Kalp atış sesi */
             heartbeatAudio = new Audio("heartbeat.mp3");
             heartbeatAudio.loop = true;
             heartbeatAudio.volume = 0.8;
-            heartbeatAudio.play();
+            heartbeatAudio.play().catch(() => {});
 
-            /* ⏱️ SAYAÇ BURAYA TAŞINIYOR */
             const counterEl = document.querySelector(".date");
             container.appendChild(counterEl);
-
             return;
           }
 
-          if (!container.children[lineIndex]) {
-            const line = document.createElement("div");
-            container.appendChild(line);
+          if (!container.children[line]) {
+            container.appendChild(document.createElement("div"));
           }
 
-          const currentLine = lines[lineIndex];
-
-          if (charIndex < currentLine.length) {
-            container.children[lineIndex].textContent += currentLine[charIndex];
-            charIndex++;
+          if (char < lines[line].length) {
+            container.children[line].textContent += lines[line][char++];
             setTimeout(typeLine, 80);
           } else {
-            lineIndex++;
-            charIndex = 0;
+            line++; char = 0;
             setTimeout(typeLine, 400);
           }
         }
 
         typeLine();
-
-      }, 1500);
+      }, 1200);
     }
   });
 
-  /* ❤️ İLİŞKİ SAYACI */
+  /* =====================
+     SAYAÇ
+  ===================== */
   const startDate = new Date("2025-12-01T00:00:00");
 
   function updateCounter() {
-    const now = new Date();
-    const diff = now - startDate;
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const diff = new Date() - startDate;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor(diff / 3600000) % 24;
+    const minutes = Math.floor(diff / 60000) % 60;
 
     const counter = document.getElementById("counter");
     if (counter) {
-      counter.innerHTML = `${days} gün ${hours} saat ${minutes} dakika`;
+      counter.textContent = `${days} gün ${hours} saat ${minutes} dakika`;
     }
   }
 
