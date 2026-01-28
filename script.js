@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let noCount = 0;
   let heartCount = 5;
   let heartbeatAudio = null;
+  let finalPlayed = false;
 
   const scenes = [
     { id: "section1", bg: "images-bg1.jpg", pos: "center top" },
@@ -25,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
 
-    // Mobil / Web kırpma farkı
     if (window.innerWidth < 768) {
       document.body.style.backgroundPosition = scene.pos || "center top";
     } else {
@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // İlk sahne
   document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
@@ -128,11 +127,18 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    /* ✔️ EVET – FINAL */
+    /* ✔️ EVET – FINAL (GARANTİLİ) */
     if (e.target.id === "yesBtn") {
+      if (finalPlayed) return;
+      finalPlayed = true;
+
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
       setTimeout(() => {
+
+        const old = document.querySelector(".valentineType");
+        if (old) old.remove();
+
         const lines = [
           "💓 Ve bu,",
           "💓 seninle geçirdiğimiz 💓",
@@ -152,10 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
             love.textContent = "💓 SENİ SEVİYORUM 💓";
             container.appendChild(love);
 
-            heartbeatAudio = new Audio("heartbeat.mp3");
-            heartbeatAudio.loop = true;
-            heartbeatAudio.volume = 0.8;
-            heartbeatAudio.play().catch(() => {});
+            if (!heartbeatAudio) {
+              heartbeatAudio = new Audio("heartbeat.mp3");
+              heartbeatAudio.loop = true;
+              heartbeatAudio.volume = 0.8;
+              heartbeatAudio.play().catch(() => {});
+            }
 
             const counterEl = document.querySelector(".date");
             container.appendChild(counterEl);
