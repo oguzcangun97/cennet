@@ -111,13 +111,42 @@ document.addEventListener("DOMContentLoaded", () => {
       heartCount = 1;
       box.innerHTML = `
         ${renderHeartBar()}
-        <p>❤️ Kalbim geri geldi…</p>
-        <p>Şimdi asıl soruya geçebiliriz.</p>
-        <button id="yesBtn" class="choice yes">Devam 💓</button>
+        <button id="continueBtn" class="choice yes">Devam 💓</button>
       `;
     }
 
-    /* ✔️ EVET – FINAL */
+    /* ▶️ DEVAM */
+    if (e.target.id === "continueBtn") {
+      box.innerHTML = `
+        <p style="font-size:20px; font-weight:600;">
+          Bunu birlikte bir ömür yaşayalım mı?
+        </p>
+        <div style="margin-top:20px;">
+          <button id="lifeYes" class="choice yes">Evet</button>
+          <button id="lifeNo" class="choice no">Hayır</button>
+        </div>
+      `;
+    }
+
+    /* ❤️ EVET */
+    if (e.target.id === "lifeYes") {
+      box.innerHTML = `
+        <p style="font-size:20px;">
+          💓 Oh sonunda katil olmadım 😄
+        </p>
+      `;
+    }
+
+    /* 😅 HAYIR */
+    if (e.target.id === "lifeNo") {
+      box.innerHTML = `
+        <p style="font-size:18px; opacity:0.85;">
+          😅 Tamam… ama bu cevabı kalbim kabul etmeyebilir. 😅
+        </p>
+      `;
+    }
+
+    /* ✔️ FINAL DAKTİLO */
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
