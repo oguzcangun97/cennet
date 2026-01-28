@@ -182,4 +182,18 @@ section {
   display: block;
   margin-top: 6px;
 }
+#heartBar {
+  margin-top: 16px;
+  font-size: 26px;
+  letter-spacing: 6px;
+}
+
+.choice.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.choice.disabled:hover {
+  opacity: 0.4;
+}
 
