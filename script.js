@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let heartbeatAudio = null;
 
   const scenes = [
-    { id: "section1", bg: "images-bg1.jpg" },
-    { id: "section2", bg: "images-bg2.jpg", soft: true },
-    { id: "section3", bg: "images-bg3.jpg" },
-    { id: "section4", bg: "images-bg4.jpg", soft: true },
-    { id: "section5", bg: "images-bg5.jpg" },
-    { id: "section6", bg: "images-bg6.jpg", soft: true }
+    { id: "section1", bg: "images-bg1.jpg", pos: "center top" },
+    { id: "section2", bg: "images-bg2.jpg", pos: "center 30%", soft: true },
+    { id: "section3", bg: "images-bg3.jpg", pos: "center top" },
+    { id: "section4", bg: "images-bg4.jpg", pos: "center 40%", soft: true },
+    { id: "section5", bg: "images-bg5.jpg", pos: "center top" },
+    { id: "section6", bg: "images-bg6.jpg", pos: "center 25%", soft: true }
   ];
 
   /* =====================
@@ -23,16 +23,28 @@ document.addEventListener("DOMContentLoaded", () => {
   function showScene(scene) {
     document.body.style.backgroundImage = `url('${scene.bg}')`;
     document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+
+    // Mobil / Web kırpma farkı
+    if (window.innerWidth < 768) {
+      document.body.style.backgroundPosition = scene.pos || "center top";
+    } else {
+      document.body.style.backgroundPosition = "center center";
+    }
+
     document.body.style.setProperty(
       "--overlay",
       scene.soft ? "rgba(15,23,42,0.35)" : "rgba(15,23,42,0.6)"
     );
   }
 
+  // İlk sahne
   document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
+  /* =====================
+     DEVAM ET
+  ===================== */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
     if (!scenes[index]) return;
@@ -62,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
      TIKLAMALAR
   ===================== */
   document.body.addEventListener("click", (e) => {
-
     const box = document.getElementById("choiceBox");
     if (!box) return;
 
@@ -111,42 +122,13 @@ document.addEventListener("DOMContentLoaded", () => {
       heartCount = 1;
       box.innerHTML = `
         ${renderHeartBar()}
-        <button id="continueBtn" class="choice yes">Devam 💓</button>
+        <p>❤️ Kalbim geri geldi…</p>
+        <p>Şimdi asıl soruya geçebiliriz.</p>
+        <button id="yesBtn" class="choice yes">Devam 💓</button>
       `;
     }
 
-    /* ▶️ DEVAM */
-    if (e.target.id === "continueBtn") {
-      box.innerHTML = `
-        <p style="font-size:20px; font-weight:600;">
-          Bunu birlikte bir ömür yaşayalım mı?
-        </p>
-        <div style="margin-top:20px;">
-          <button id="lifeYes" class="choice yes">Evet</button>
-          <button id="lifeNo" class="choice no">Hayır</button>
-        </div>
-      `;
-    }
-
-    /* ❤️ EVET */
-    if (e.target.id === "lifeYes") {
-      box.innerHTML = `
-        <p style="font-size:20px;">
-          💓 Oh sonunda katil olmadım 😄
-        </p>
-      `;
-    }
-
-    /* 😅 HAYIR */
-    if (e.target.id === "lifeNo") {
-      box.innerHTML = `
-        <p style="font-size:18px; opacity:0.85;">
-          😅 Tamam… ama bu cevabı kalbim kabul etmeyebilir. 😅
-        </p>
-      `;
-    }
-
-    /* ✔️ FINAL DAKTİLO */
+    /* ✔️ EVET – FINAL */
     if (e.target.id === "yesBtn") {
       box.innerHTML = "<p>💓 Oh sonunda katil olmadım. 💓</p>";
 
