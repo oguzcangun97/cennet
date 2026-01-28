@@ -209,3 +209,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateCounter, 60000);
 
 });
+
+// 🚀 PWA Service Worker
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
+
