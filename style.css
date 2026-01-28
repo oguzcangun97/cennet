@@ -169,3 +169,17 @@ section {
     opacity: 0.85;
   }
 }
+/* FINAL SAHNEDE SAYAÇ DÜZELTME */
+.valentineType .date {
+  margin-top: 24px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+.valentineType #counter {
+  font-size: 20px;
+  font-weight: 600;
+  display: block;
+  margin-top: 6px;
+}
+
