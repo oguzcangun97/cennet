@@ -1,3 +1,7 @@
+/* =========================
+   GENEL AYARLAR
+========================= */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -17,7 +21,10 @@ body.zoomed {
   transform: scale(1);
 }
 
-/* Overlay */
+/* =========================
+   OVERLAY
+========================= */
+
 body::after {
   content: "";
   position: fixed;
@@ -26,7 +33,10 @@ body::after {
   z-index: -1;
 }
 
-/* Sahne */
+/* =========================
+   SAHNELER
+========================= */
+
 section {
   min-height: 100vh;
   display: none;
@@ -40,7 +50,10 @@ section {
   display: flex;
 }
 
-/* Caption */
+/* =========================
+   METİNLER
+========================= */
+
 .caption {
   margin-top: 20px;
   font-size: 14px;
@@ -48,7 +61,10 @@ section {
   font-style: italic;
 }
 
-/* Sayaç */
+/* =========================
+   SAYAÇ
+========================= */
+
 .date {
   margin-top: 50px;
   font-size: 13px;
@@ -62,7 +78,10 @@ section {
   font-weight: 500;
 }
 
-/* Devam Et */
+/* =========================
+   DEVAM ET BUTONU
+========================= */
+
 #nextBtn {
   position: fixed;
   bottom: 80px;
@@ -75,7 +94,10 @@ section {
   z-index: 1000;
 }
 
-/* Evet / Hayır */
+/* =========================
+   EVET / HAYIR
+========================= */
+
 #choiceBox {
   margin-top: 60px;
   display: flex;
@@ -94,7 +116,10 @@ section {
   opacity: 0.6;
 }
 
-/* ✨ DAKTİLO METİN */
+/* =========================
+   DAKTİLO METİN (SATIRLAR)
+========================= */
+
 .valentineType {
   margin-top: 40px;
   font-size: 26px;
@@ -106,21 +131,41 @@ section {
     0 0 22px rgba(255,80,140,0.6);
 }
 
-/* ❤️ SENİ SEVİYORUM – FINAL */
+/* =========================
+   💓 SENİ SEVİYORUM (FINAL)
+   NABIZ + PARLAMA
+========================= */
+
 .loveBig {
-  margin-top: 30px;
-  font-size: 34px;
+  margin-top: 32px;
+  font-size: 36px;
   font-weight: 800;
   letter-spacing: 2px;
   color: #ffd1dc;
+  text-align: center;
   text-shadow:
     0 0 12px rgba(255,120,160,0.9),
     0 0 28px rgba(255,80,140,0.9),
     0 0 48px rgba(255,60,120,0.9);
-  animation: lovePulse 1.8s ease-in-out infinite;
+  animation: lovePulse 1.2s ease-in-out infinite;
 }
 
+/* Nabız animasyonu */
 @keyframes lovePulse {
-  0% { transform: scale(1); opacity: 0.85; }
-  50% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.85; }
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  30% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
