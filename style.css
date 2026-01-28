@@ -1,10 +1,6 @@
-/* =========================
-   GENEL AYARLAR
-========================= */
-
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #f8fafc;
   text-align: center;
 
@@ -13,17 +9,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-  transform: scale(1.05);
+  transform: scale(1.03);
   transition: background-image 0.8s ease, transform 1.2s ease;
 }
-
-body.zoomed {
-  transform: scale(1);
-}
-
-/* =========================
-   OVERLAY
-========================= */
 
 body::after {
   content: "";
@@ -33,167 +21,79 @@ body::after {
   z-index: -1;
 }
 
-/* =========================
-   SAHNELER
-========================= */
-
 section {
   min-height: 100vh;
   display: none;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 32px 16px;
 }
 
 .hero {
   display: flex;
 }
 
-/* =========================
-   METİNLER
-========================= */
-
+/* Caption */
 .caption {
-  margin-top: 20px;
   font-size: 14px;
   opacity: 0.7;
   font-style: italic;
 }
 
-/* =========================
-   SAYAÇ
-========================= */
-
+/* Counter */
 .date {
-  margin-top: 50px;
   font-size: 13px;
   opacity: 0.6;
 }
 
 #counter {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 18px;
   font-weight: 500;
 }
 
-/* =========================
-   DEVAM ET BUTONU
-========================= */
-
+/* Next */
 #nextBtn {
   position: fixed;
-  bottom: 80px;
-  right: 30px;
-  padding: 14px 28px;
+  bottom: 24px;
+  right: 20px;
+  padding: 12px 22px;
   background: transparent;
   color: #f8fafc;
   border: 1px solid #f8fafc;
-  cursor: pointer;
   z-index: 1000;
 }
 
-/* =========================
-   EVET / HAYIR
-========================= */
-
-#choiceBox {
-  margin-top: 60px;
-  display: flex;
-  gap: 20px;
-}
-
+/* Choices */
 .choice {
-  padding: 12px 28px;
-  border: 1px solid #f8fafc;
+  padding: 12px 26px;
   background: transparent;
+  border: 1px solid #f8fafc;
   color: #f8fafc;
-  cursor: pointer;
 }
 
 .choice.no {
   opacity: 0.6;
 }
 
-/* =========================
-   DAKTİLO METİN (SATIRLAR)
-========================= */
-
+/* Valentine typing */
 .valentineType {
-  margin-top: 40px;
-  font-size: 26px;
+  margin-top: 32px;
+  font-size: clamp(20px, 5vw, 26px);
   font-weight: 600;
-  line-height: 1.4;
   color: #ffe4e6;
-  text-shadow:
-    0 0 10px rgba(255,120,160,0.6),
-    0 0 22px rgba(255,80,140,0.6);
+  text-shadow: 0 0 10px rgba(255,120,160,.6);
 }
 
-/* =========================
-   💓 SENİ SEVİYORUM (FINAL)
-   NABIZ + PARLAMA
-========================= */
-
+/* Love */
 .loveBig {
-  margin-top: 32px;
-  font-size: 36px;
+  margin-top: 24px;
+  font-size: clamp(26px, 6vw, 34px);
   font-weight: 800;
   letter-spacing: 2px;
-  color: #ffd1dc;
-  text-align: center;
-  text-shadow:
-    0 0 12px rgba(255,120,160,0.9),
-    0 0 28px rgba(255,80,140,0.9),
-    0 0 48px rgba(255,60,120,0.9);
-  animation: lovePulse 1.2s ease-in-out infinite;
+  animation: lovePulse 1.8s infinite;
 }
 
-/* Nabız animasyonu */
 @keyframes lovePulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-  30% {
-    transform: scale(1.12);
-    opacity: 1;
-  }
-  60% {
-    transform: scale(1);
-    opacity: 0.95;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-}
-/* FINAL SAHNEDE SAYAÇ DÜZELTME */
-.valentineType .date {
-  margin-top: 24px;
-  font-size: 16px;
-  opacity: 0.85;
-}
-
-.valentineType #counter {
-  font-size: 20px;
-  font-weight: 600;
-  display: block;
-  margin-top: 6px;
-}
-#heartBar {
-  margin-top: 16px;
-  font-size: 26px;
-  letter-spacing: 6px;
-}
-
-.choice.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.choice.disabled:hover {
-  opacity: 0.4;
-}
-
+  0% { transform: scale(1); opacity: .85; }
