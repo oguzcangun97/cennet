@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let index = 0;
   let noCount = 0;
+  let heartbeatAudio = null;
 
   const scenes = [
     { id: "section1", bg: "images-bg1.jpg" },
@@ -31,15 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("section1").style.display = "flex";
   showScene(scenes[0]);
 
-  /* 🎵 Arka plan müziği */
-  document.body.addEventListener("click", () => {
-    const music = document.getElementById("bgMusic");
-    if (music && music.paused) {
-      music.volume = 0.3;
-      music.play();
-    }
-  }, { once: true });
-
   /* ▶️ DEVAM ET */
   document.getElementById("nextBtn").addEventListener("click", () => {
     index++;
@@ -56,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ❤️ EVET / HAYIR + DAKTİLO FINAL */
+  /* ❤️ EVET / HAYIR + FINAL */
   document.body.addEventListener("click", (e) => {
 
     const box = document.getElementById("choiceBox");
@@ -87,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
 
         const lines = [
-          "💓 Ve bu,💓",
+          "💓 Ve bu,",
           "💓 seninle geçirdiğimiz 💓",
           "💓 ilk Sevgililer Günü,💓"
         ];
@@ -101,10 +93,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function typeLine() {
           if (lineIndex >= lines.length) {
+
+            // 💓 SENİ SEVİYORUM
             const love = document.createElement("div");
             love.className = "loveBig";
             love.textContent = "💓 SENİ SEVİYORUM 💓";
             container.appendChild(love);
+
+            // 🔊 Kalp atış sesi
+            heartbeatAudio = new Audio("heartbeat.mp3");
+            heartbeatAudio.loop = true;
+            heartbeatAudio.volume = 0.8;
+            heartbeatAudio.play();
+
             return;
           }
 
@@ -132,25 +133,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ❤️ İLİŞKİ SAYACI */
-  const startDate = new Date("2025-12-01T00:00:00");
-
-  function updateCounter() {
-    const now = new Date();
-    const diff = now - startDate;
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-
-    const counter = document.getElementById("counter");
-    if (counter) {
-      counter.innerHTML = `${days} gün ${hours} saat ${minutes} dakika`;
-    }
-  }
-
-  updateCounter();
-  setInterval(updateCounter, 60000);
-
 });
-
