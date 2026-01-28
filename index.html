@@ -3,59 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <title>Bazı İnsanlar Tesadüf Değildir</title>
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+
+<body class="bg-dark text-light">
 
   <!-- Arka plan müziği -->
   <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="heartbeat.mp3" type="audio/mpeg">
   </audio>
 
-  <section class="hero" id="section1">
-    <h1>Bazı insanlar tesadüf değildir.</h1>
-    <p class="caption">Bunu ilk fark ettiğim an buydu.</p>
-  </section>
-
-  <section class="hidden" id="section2">
-    <p>Seni dinlemek kolay.<br>Zihnin sakin ama uyanık.</p>
-    <p class="caption">Sessizlik bile doluydu.</p>
-  </section>
-
-  <section class="hidden" id="section3">
-    <p>Biri seni gerçekten fark ettiğinde,<br>bunu anlatmasına gerek kalmaz.</p>
-    <p class="caption">Bakışından belliydi.</p>
-  </section>
-
-  <section class="hidden" id="section4">
-    <p>Bazı anlar vardır,<br>konuşmadan da paylaşılır.</p>
-    <p class="caption">Bu anlardan biri.</p>
-  </section>
-
-  <section class="hidden" id="section5">
-    <p>Bu bir büyük cümle değil.<br>Sadece içten bir düşünce.</p>
-    <p class="caption">Ve hâlâ geçerli.</p>
-  </section>
-
-  <!-- FİNAL -->
-  <section class="hidden" id="section6">
-    <p>Bu bir davet değil.<br>Sadece aynı anda,<br>aynı yerde olma fikri.</p>
-
-    <p style="margin-top:20px;">Bunu birlikte yaşayalım mı?</p>
-
-    <div id="choiceBox">
-      <button id="noBtn" class="choice no">Hayır</button>
-      <button id="yesBtn" class="choice yes">Evet</button>
+  <!-- HERO -->
+  <section id="section1" class="hero d-flex align-items-center">
+    <div class="container text-center">
+      <h1 class="display-6 display-md-4">
+        Bazı insanlar tesadüf değildir.
+      </h1>
+      <p class="caption mt-3">
+        Bunu ilk fark ettiğim an buydu.
+      </p>
     </div>
-
-    <p class="date">
-      Birlikte geçen süre<br>
-      <span id="counter">yükleniyor...</span>
-    </p>
   </section>
 
-  <button id="nextBtn">Devam et</button>
+  <!-- SCENES -->
+  <section id="section2" class="hidden py-5">
+    <div class="container text-center">
+      <p>Seni dinlemek kolay.<br>Zihnin sakin ama uyanık.</p>
+      <p class="caption">Sessizlik bile doluydu.</p>
+    </div>
+  </section>
 
+  <section id="section3" class="hidden py-5">
+    <div class="container text-center">
+      <p>Biri seni gerçekten fark ettiğinde,<br>bunu anlatmasına gerek kalmaz.</p>
+      <p class="caption">Bakışından belliydi.</p>
+    </div>
+  </section>
+
+  <section id="section4" class="hidden py-5">
+    <div class="container text-center">
+      <p>Bazı anlar vardır,<br>konuşmadan da paylaşılır.</p>
+      <p class="caption">Bu anlardan biri.</p>
+    </div>
+  </section>
+
+  <section id="section5" class="hidden py-5">
+    <div class="container text-center">
+      <p>Bu bir büyük cümle değil.<br>Sadece içten bir düşünce.</p>
+      <p class="caption">Ve hâlâ geçerli.</p>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section id="section6" class="hidden py-5">
+    <div class="container text-center">
+
+      <p>
+        Bu bir davet değil.<br>
+        Sadece aynı anda,<br>
+        aynı yerde olma fikri.
+      </p>
+
+      <p class="mt-4">Bunu birlikte yaşayalım mı?</p>
+
+      <div id="choiceBox"
+        class="d-flex justify-content-center gap-3 flex-wrap mt-3">
+        <button id="noBtn" class="choice no btn btn-outline-light">
+          Hayır
+        </button>
+        <button id="yesBtn" class="choice yes btn btn-light text-dark">
+          Evet
+        </button>
+      </div>
+
+      <p class="date mt-4">
+        Birlikte geçen süre<br>
+        <span id="counter">yükleniyor...</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <button id="nextBtn" class="btn btn-outline-light">
+    Devam et
+  </button>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
