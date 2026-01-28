@@ -145,3 +145,14 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+/* 🤖 ANDROID GESTURE BAR POLISH */
+@media (max-width: 768px) {
+  #nextBtn {
+    bottom: calc(20px + 16px); /* gesture bar boşluğu */
+  }
+
+  .valentineType .date {
+    padding-bottom: 16px;
+  }
+}
+
